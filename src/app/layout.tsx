@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Poppins, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/header";
+import ContextProvider from "@/lib/context";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin-ext"],
+  weight: ["100", "300", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +21,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter?.className} overflow-x-hidden`}>
+        <ContextProvider>
+          <Header />
+          {children}
+        </ContextProvider>
+      </body>
     </html>
   );
 }
