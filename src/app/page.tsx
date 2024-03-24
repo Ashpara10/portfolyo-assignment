@@ -2,7 +2,7 @@
 import HeroSection from "@/components/hero-section";
 import Projects from "@/components/projects";
 import Services from "@/components/services";
-import { motion } from "framer-motion";
+import { Variants, motion } from "framer-motion";
 import Testimonials from "@/components/testimonials";
 import { DataContext } from "@/lib/context";
 import { About, Project, Service, Skill, Testimonial } from "@/lib/types";
@@ -12,13 +12,15 @@ import { useContext, useEffect, useRef, useState } from "react";
 export default function Home() {
   const { user } = useContext(DataContext);
   const { x, y } = useMousePosition();
-  const [cursorVariant, setCursorVariant] = useState("default");
+  const [cursorVariant, setCursorVariant] = useState<"text" | "default">(
+    "default"
+  );
   const textEnter = () => setCursorVariant("text");
   const textLeave = () => setCursorVariant("default");
   useEffect(() => {
     console.log({ cursorVariant });
   }, [cursorVariant]);
-  const variants = {
+  const variants: Variants = {
     default: {
       width: 50,
       height: 50,
@@ -27,8 +29,8 @@ export default function Home() {
     text: {
       height: 170,
       width: 170,
-      x: x,
-      y: y,
+      x: Number(x),
+      y: Number(y),
       backgroundColor: "black",
       mixBlendMode: "difference",
     },
