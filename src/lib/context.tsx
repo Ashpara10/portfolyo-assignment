@@ -23,7 +23,7 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
       document.body.classList.add("loaded");
     });
     const getData = async ({ id }: { id?: string }) => {
-      const resp = await fetch(`http://localhost:3000/api/data?id=${id}`);
+      const resp = await fetch(`/api/data?id=${id}`);
       const res = await resp?.json();
       setData(res?.user);
     };
