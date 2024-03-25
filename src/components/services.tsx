@@ -1,7 +1,8 @@
 import { DataContext } from "@/lib/context";
 import { Service } from "@/lib/types";
-import { Variants, motion } from "framer-motion";
-import React, { useContext, useState } from "react";
+import useMousePosition from "@/lib/useMousePosition";
+import { Variants, motion, useMotionValue, useSpring } from "framer-motion";
+import React, { useContext, useEffect, useState } from "react";
 
 const variants: Variants = {
   initial: (i: number) => ({
@@ -20,16 +21,16 @@ const variants: Variants = {
 
 const Services = ({
   services,
-  enter,
-  leave,
-  variant,
 }: {
   services: Service[];
   enter?: () => void;
   leave?: () => void;
   variant?: string;
 }) => {
-  const [hovered, setHovered] = useState<number>();
+  const { x, y } = useMousePosition();
+
+  const [hovered, setHovered] = useState<number | null>();
+
   const colors = [
     { bg: "#c6f459", color: "black" },
     { bg: "#f39a8e", color: "black" },
@@ -40,9 +41,26 @@ const Services = ({
   ];
   return (
     <section
-      className="w-full my-10 p-8 flex items-center justify-center "
+      className="w-full my-10 p-8 flex relative items-center justify-center "
       id="service"
     >
+      {hovered !== null && (
+        <motion.div
+          style={{
+            left: x,
+            top: y,
+          }}
+          transition={{ type: "tween", duration: 0.25, ease: "easeIn" }}
+          className="gap-0.5 bg-white border border-gray-300/70 rounded-lg flex flex-col items-start justify-center px-4 py-2  pointer-events-none fixed z-40 "
+        >
+          <span className="text-lg font-medium">
+            {services[hovered as number]?.name}
+          </span>
+          <span className="text-green-600">
+            {services[hovered as number]?.charge}
+          </span>
+        </motion.div>
+      )}
       <motion.div className="max-w-6xl w-full gap-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
         {services?.map((e, i) => {
           const bg = colors[i]?.bg;
@@ -54,19 +72,21 @@ const Services = ({
                 setHovered(i);
               }}
               onMouseLeave={() => {
-                setHovered(undefined);
+                setHovered(null);
               }}
               style={{
                 backgroundColor: bg,
                 color: color,
               }}
-              className=" group duration-75  w-full  transition-all overflow-hidden flex-col items-center justify-start border rounded-[30px] odd:rotate-3 flex  py-10 px-6"
+              className=" group duration-75  w-full  transition-all overflow-hidden flex-col items-center justify-start border rounded-[30px]  flex  py-10 px-6"
               custom={i}
               variants={variants}
               initial="initial"
               animate="animate"
             >
-              <p className={`w-full z-0 flex text-4xl mx-2 my-4 font-medium  `}>
+              <p
+                className={`w-full z-0 flex text-3xl md:text-4xl mx-2 my-4 font-medium  `}
+              >
                 {e?.desc}
               </p>
             </motion.div>
