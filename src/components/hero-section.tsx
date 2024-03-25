@@ -26,17 +26,29 @@ const HeroSection = ({
       className="w-full   flex-col flex items-center gap-3 justify-center min-h-screen"
     >
       <div className="w-full flex px-3 py-2 flex-col gap-y-2 min-h-[90vh] items-center justify-center">
-        <div className="max-w-4xl w-full flex items-center justify-start ">
+        <div className="max-w-4xl w-full flex  items-center justify-start ">
+          <Image
+            src={user?.avatar?.url}
+            width={100}
+            height={100}
+            style={{
+              objectFit: "cover",
+            }}
+            className="rounded-full md:hidden flex aspect-square "
+            alt={user?.avatar?.public_id}
+            quality={100}
+            loading="eager"
+          />
           <motion.h2
             initial={{ opacity: 0, translateX: -50 }}
             animate={{ opacity: 1, translateX: 0 }}
             transition={{ type: "tween", duration: 0.75 }}
             onMouseEnter={enter}
             onMouseLeave={leave}
-            className="text-5xl mx-4 font-bold md:text-7xl leading-tight lg:text-9xl md:font-semibold "
+            className="text-5xl mx-4 font-bold md:text-7xl leading-tight lg:text-9xl tracking-tight md:font-semibold "
           >
-            Hey,
-            <br /> I’m {user?.name.split(" ")[0]}
+            Hey, <br />
+            I’m {user?.name.split(" ")[0]}
           </motion.h2>
         </div>
         <motion.div
@@ -49,15 +61,20 @@ const HeroSection = ({
             src={user?.avatar?.url}
             width={100}
             height={100}
+            style={{
+              objectFit: "cover",
+            }}
+            quality={100}
+            loading="eager"
             className="rounded-full hidden md:flex aspect-square "
-            alt=""
+            alt={user?.avatar?.public_id}
           />
           <div className="max-w-xl w-full flex flex-col">
             <span className="w-full text-3xl flex items-center justify-start  md:font-semibold ">
               <Minus className="size-8 mb-8 mr-3 font-bold md:size-12 lg:size-14 md:font-semibold" />{" "}
               {user?.subTitle} 🌱
             </span>
-            <span className=" flex items-center text-xl  font-semibold justify-start ml-10 gap-2">
+            <span className=" flex items-center text-lg md:text-xl  font-medium md:font-semibold justify-start ml-2 mt-2 md:ml-10 gap-2">
               <MapPin className="text-red-600" />
               {user?.address}
             </span>

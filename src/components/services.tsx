@@ -51,7 +51,7 @@ const Services = ({
             top: y,
           }}
           transition={{ type: "tween", duration: 0.25, ease: "easeIn" }}
-          className="gap-0.5 bg-white border border-gray-300/70 rounded-lg flex flex-col items-start justify-center px-4 py-2  pointer-events-none fixed z-40 "
+          className={`gap-0.5 bg-white border border-gray-300/70 rounded-lg flex flex-col items-start justify-center px-4 py-2  pointer-events-none fixed z-40 `}
         >
           <span className="text-lg font-medium">
             {services[hovered as number]?.name}
@@ -78,7 +78,7 @@ const Services = ({
                 backgroundColor: bg,
                 color: color,
               }}
-              className=" group duration-75  w-full  transition-all overflow-hidden flex-col items-center justify-start border rounded-[30px]  flex  py-10 px-6"
+              className=" hover:saturate-[75%] duration-75  w-full  transition-all overflow-hidden flex-col items-center justify-start border rounded-[30px]  flex  py-10 px-6"
               custom={i}
               variants={variants}
               initial="initial"
