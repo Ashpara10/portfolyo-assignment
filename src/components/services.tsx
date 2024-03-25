@@ -41,7 +41,7 @@ const Services = ({
   ];
   return (
     <section
-      className="w-full my-10 p-8 flex relative items-center justify-center "
+      className="w-full my-10 p-8 flex relative overflow-hidden items-center justify-center "
       id="service"
     >
       {hovered !== null && (
