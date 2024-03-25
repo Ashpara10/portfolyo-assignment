@@ -10,9 +10,9 @@ const Testimonials = ({
   variant,
 }: {
   data: Testimonial[];
-  enter: () => void;
-  leave: () => void;
-  variant: string;
+  enter?: () => void;
+  leave?: () => void;
+  variant?: string;
 }) => {
   const [hovered, setHovered] = useState<number>();
 
@@ -24,11 +24,6 @@ const Testimonials = ({
           return (
             <div
               key={t?._id}
-              onMouseEnter={() => {
-                enter();
-                setHovered(i);
-              }}
-              onMouseLeave={leave}
               className={`  w-full px-3 py-2 mx-2 h-fit odd:rotate-3  border border-gray-300/80  flex flex-col  rounded-2xl`}
             >
               <span

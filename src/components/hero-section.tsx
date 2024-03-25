@@ -1,46 +1,79 @@
 import { About } from "@/lib/types";
-import { MapPin, Phone } from "lucide-react";
+import { Dot, MapPin, Minus, Phone } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-const HeroSection = ({ user }: { user: About }) => {
+
+const HeroSection = ({
+  user,
+  enter,
+  leave,
+  variant,
+}: {
+  user: About;
+  enter?: () => void;
+  leave?: () => void;
+  variant?: string;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const desc = user?.description.split(" ");
+
   return (
-    <section className="w-full  flex-col md:flex-row flex items-center gap-3 justify-center min-h-screen">
-      <div className="absolute inset-0 -z-10 h-full w-full  bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]">
-        <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-fuchsia-400 opacity-20 blur-[100px]"></div>
-      </div>
-      <div className="overflow-hidden w-full flex items-center justify-center">
-        <div className=" overflow-hidden rounded-full lg:rounded-y-full ">
+    <section
+      ref={ref}
+      id="home"
+      className="w-full   flex-col flex items-center gap-3 justify-center min-h-screen"
+    >
+      <div className="w-full flex px-3 py-2 flex-col gap-y-2 min-h-[90vh] items-center justify-center">
+        <div className="max-w-4xl w-full flex items-center justify-start ">
+          <motion.h2
+            initial={{ opacity: 0, translateX: -50 }}
+            animate={{ opacity: 1, translateX: 0 }}
+            transition={{ type: "tween", duration: 0.75 }}
+            onMouseEnter={enter}
+            onMouseLeave={leave}
+            className="text-5xl mx-4 font-bold md:text-7xl leading-tight lg:text-9xl md:font-semibold "
+          >
+            Hey,
+            <br /> I’m {user?.name.split(" ")[0]}
+          </motion.h2>
+        </div>
+        <motion.div
+          initial={{ opacity: 0, translateX: 100 }}
+          animate={{ opacity: 1, translateX: 0 }}
+          transition={{ type: "tween", duration: 0.75 }}
+          className="w-full items-center justify-end flex max-w-4xl"
+        >
           <Image
-            alt={user?.avatar._id}
-            className="md:aspect-auto aspect-square"
             src={user?.avatar?.url}
-            width={400}
-            height={400}
+            width={100}
+            height={100}
+            className="rounded-full hidden md:flex aspect-square "
+            alt=""
           />
-        </div>
+          <div className="max-w-xl w-full flex flex-col">
+            <span className="w-full text-3xl flex items-center justify-start  md:font-semibold ">
+              <Minus className="size-8 mb-8 mr-3 font-bold md:size-12 lg:size-14 md:font-semibold" />{" "}
+              {user?.subTitle} 🌱
+            </span>
+            <span className=" flex items-center text-xl  font-semibold justify-start ml-10 gap-2">
+              <MapPin className="text-red-600" />
+              {user?.address}
+            </span>
+          </div>
+        </motion.div>
       </div>
-      <div className="w-full  flex flex-col items-center justify-center px-4">
-        <h2 className="w-full text-4xl lg:text-6xl font-bold tracking-tight">
-          {user?.name}
-        </h2>
-        <span className="my-2 w-full">{user?.subTitle}</span>
-        <div className="w-full flex items-center justify-start gap-x-3 mt-2">
-          <span className="flex items-center justify-center gap-x-2">
-            <MapPin className="text-red-600" />
-            {user?.address}
-          </span>
-          <span className="flex items-center justify-center gap-x-2">
-            {user?.phoneNumber}
-          </span>
-        </div>
-        <div className="w-full flex items-center justify-start">
-          <p className="mt-2 w-full max-w-lg  opacity-80 font-medium">
-            {user?.description}
-          </p>
-        </div>
+      <div
+        ref={ref}
+        className="min-h-screen px-3 py-2 flex items-center justify-center w-full bg-black"
+      >
+        <motion.p className="max-w-5xl gap-2 w-full flex flex-wrap text-white   text-3xl md:text-4xl lg:text-5xl leading-tight font-medium md:font-semibold">
+          {desc?.map((d, i) => {
+            return <motion.span key={i}>{d}</motion.span>;
+          })}
+        </motion.p>
       </div>
-      {/* <img alt="" className="w-full ab" src={"/blob.svg"} /> */}
     </section>
   );
 };
