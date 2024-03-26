@@ -9,6 +9,7 @@ import {
   About,
   Project,
   Service,
+  SocialHandle,
   Testimonial,
   Timeline as Ttimeline,
 } from "@/lib/types";
@@ -26,11 +27,14 @@ export default function Home() {
       ) : (
         <>
           <HeroSection user={user?.about as About} />
-          {/* <Timeline data={user?.timeline as Ttimeline[]} /> */}
           <Services services={user?.services as Service[]} />
           <Projects projects={user?.projects as Project[]} />
           <Testimonials data={user?.testimonials as Testimonial[]} />
-          <Contact />
+          <Contact
+            data={user?.social_handles as SocialHandle[]}
+            phone={user?.about?.phoneNumber}
+            email={user?.email}
+          />
         </>
       )}
     </div>

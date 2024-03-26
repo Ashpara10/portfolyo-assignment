@@ -7,3 +7,10 @@
         animation-play-state: paused;
     }
 }
+
+input{
+    @apply focus-visible:outline-none
+}
+textarea{
+    @apply focus-visible:outline-none
+}

@@ -4,7 +4,7 @@ interface Avatar {
   _id: string;
 }
 
-interface SocialHandle {
+export interface SocialHandle {
   platform: string;
   url: string;
   image: Avatar;

@@ -50,11 +50,9 @@ const Testimonials = ({
   return (
     <section
       ref={ref}
+      id="testimonials"
       className="w-full relative overflow-y-hidden flex flex-col min-h-screen"
     >
-      {/* <span className="text-3xl font-bold mx-3   text-center">
-        Testimonials
-      </span> */}
       {isInside && (
         <motion.div
           variants={cursorVariant}

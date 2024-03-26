@@ -50,13 +50,14 @@ const Projects = ({ projects }: { projects: Project[] }) => {
     <section
       ref={ref}
       className="w-full my-10 py-8 px-4 flex flex-col items-center justify-center"
+      id="projects"
     >
       <motion.div
         initial="hidden"
         variants={containerVariants}
         ref={ref}
         animate={controls}
-        className="w-full max-w-5xl gap-3 grid grid-cols-1 "
+        className="w-full max-w-5xl gap-3 px-3 grid grid-cols-1 "
       >
         <span
           className="w-full col-span-1 
@@ -96,9 +97,11 @@ const Projects = ({ projects }: { projects: Project[] }) => {
                 </div>
               </div>
 
-              <h3 className="mb-2 text-2xl font-semibold w-full">{e?.title}</h3>
+              <h3 className="mb-2 text-xl md:text-2xl font-semibold w-full">
+                {e?.title}
+              </h3>
 
-              <span className="mt-2 text-xl font-medium w-full">
+              <span className="mt-2 text-lg md:text-xl font-medium w-full">
                 {e?.description}
               </span>
               <div className="w-full flex flex-wrap gap-x-2 mt-2">
