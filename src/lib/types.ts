@@ -51,7 +51,7 @@ export interface Project {
   enabled: boolean;
 }
 
-interface Timeline {
+export interface Timeline {
   company_name: string;
   summary: string;
   sequence: number;

@@ -1,8 +1,15 @@
 import { DataContext } from "@/lib/context";
 import { Service } from "@/lib/types";
 import useMousePosition from "@/lib/useMousePosition";
-import { Variants, motion, useMotionValue, useSpring } from "framer-motion";
-import React, { useContext, useEffect, useState } from "react";
+import {
+  Variants,
+  motion,
+  useAnimation,
+  useInView,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 const variants: Variants = {
   initial: (i: number) => ({
@@ -19,6 +26,16 @@ const variants: Variants = {
   },
 };
 
+const containerVariants: Variants = {
+  visible: {
+    opacity: 1,
+    translateY: 0,
+    scale: 1,
+    transition: { duration: 0.75, type: "tween" },
+  },
+  hidden: { scale: 0.9, opacity: 0, translateY: 50 },
+};
+
 const Services = ({
   services,
 }: {
@@ -27,8 +44,12 @@ const Services = ({
   leave?: () => void;
   variant?: string;
 }) => {
+  const controls = useAnimation();
   const { x, y } = useMousePosition();
-
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, {
+    margin: "0px 100px -50px 0px",
+  });
   const [hovered, setHovered] = useState<number | null>();
 
   const colors = [
@@ -39,19 +60,24 @@ const Services = ({
     { bg: "#c77dff", color: "black" },
     { bg: "#ffb600", color: "black" },
   ];
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
   return (
     <section
       className="w-full my-10 p-8 flex relative overflow-hidden items-center justify-center "
       id="service"
     >
-      {hovered !== null && (
+      {inView && hovered !== null && (
         <motion.div
           style={{
             left: x,
             top: y,
           }}
           transition={{ type: "tween", duration: 0.25, ease: "easeIn" }}
-          className={`gap-0.5 bg-white border border-gray-300/70 rounded-lg flex flex-col items-start justify-center px-4 py-2  pointer-events-none fixed z-40 `}
+          className={`gap-0.5 bg-white border border-gray-300/70 rounded-lg flex flex-col items-start justify-center px-4 py-2  pointer-events-none fixed z-10 `}
         >
           <span className="text-lg font-medium">
             {services[hovered as number]?.name}
@@ -61,7 +87,13 @@ const Services = ({
           </span>
         </motion.div>
       )}
-      <motion.div className="max-w-6xl w-full gap-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+      <motion.div
+        initial="hidden"
+        variants={containerVariants}
+        ref={ref}
+        animate={controls}
+        className="max-w-6xl w-full gap-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 "
+      >
         {services?.map((e, i) => {
           const bg = colors[i]?.bg;
           const color = colors[i]?.color;
