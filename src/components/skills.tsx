@@ -5,7 +5,10 @@ import React from "react";
 const Skills = ({ skills }: { skills: Skill[] }) => {
   console.log({ skills });
   return (
-    <section className="w-full max-w-5xl mx-auto flex flex-col items-center justify-center">
+    <section
+      id="skills"
+      className="w-full max-w-5xl mx-auto flex flex-col items-center justify-center"
+    >
       <span className="my-2 text-4xl font-bold col-span-4">Skills</span>
       <div className=" w-full grid grid-cols-2 md:grid-cols-3 px-4 py-6 lg:grid-cols-4 gap-3">
         {skills?.map((e, i) => {
@@ -14,7 +17,7 @@ const Skills = ({ skills }: { skills: Skill[] }) => {
               key={i}
               className="max-w-md bg-white transition-all duration-75 ease-linear hover:shadow-xl hover:shadow-gray-300/80 hover:translate-x-2 hover:-translate-y-5 border p-3 rounded-3xl border-gray-300/70 w-full flex flex-col items-center justify-start"
             >
-              <div className="w-full flex items-center justify-start gap-3">
+              <div className="w-full px-2 flex items-center justify-start gap-3">
                 <Image
                   width={40}
                   height={40}

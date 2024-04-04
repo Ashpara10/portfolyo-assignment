@@ -87,7 +87,7 @@ const HeroSection = ({
         className="max-w-5xl w-full my-8 flex flex-col items-start justify-center px-4"
         ref={ref}
       >
-        <p className="flex opacity-90 text-xl md:text-2xl font-semibold">
+        <p className="flex opacity-90 text-xl md:text-2xl font-medium">
           {user?.description}
         </p>
         <span className=" flex items-center text-lg md:text-xl font-medium md:font-semibold  justify-start mt-4 gap-2">
