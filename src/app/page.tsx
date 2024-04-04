@@ -3,12 +3,14 @@ import Contact from "@/components/contact";
 import HeroSection from "@/components/hero-section";
 import Projects from "@/components/projects";
 import Services from "@/components/services";
+import Skills from "@/components/skills";
 import Testimonials from "@/components/testimonials";
 import { DataContext } from "@/lib/context";
 import {
   About,
   Project,
   Service,
+  Skill,
   SocialHandle,
   Testimonial,
   Timeline as Ttimeline,
@@ -29,6 +31,7 @@ export default function Home() {
           <HeroSection user={user?.about as About} />
           <Services services={user?.services as Service[]} />
           <Projects projects={user?.projects as Project[]} />
+          <Skills skills={user?.skills as Skill[]} />
           <Testimonials data={user?.testimonials as Testimonial[]} />
           <Contact
             data={user?.social_handles as SocialHandle[]}

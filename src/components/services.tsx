@@ -67,7 +67,7 @@ const Services = ({
   }, [controls, inView]);
   return (
     <section
-      className="w-full my-10 p-8 flex relative overflow-hidden items-center justify-center "
+      className="w-full my-10 p-8 flex flex-col relative overflow-hidden items-center justify-center "
       id="service"
     >
       {inView && hovered !== null && (
@@ -94,6 +94,12 @@ const Services = ({
         animate={controls}
         className="max-w-6xl w-full gap-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 "
       >
+        <motion.h3
+          className="w-full col-span-1 md:col-span-2 lg:col-span-3 mb-6 text-center text-4xl lg:text-5xl font-bold"
+          variants={variants}
+        >
+          Services I Offer :
+        </motion.h3>
         {services?.map((e, i) => {
           const bg = colors[i]?.bg;
           const color = colors[i]?.color;
