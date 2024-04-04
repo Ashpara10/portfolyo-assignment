@@ -7,7 +7,7 @@ const Skills = ({ skills }: { skills: Skill[] }) => {
   return (
     <section className="w-full max-w-5xl mx-auto flex flex-col items-center justify-center">
       <span className="my-2 text-4xl font-bold col-span-4">Skills</span>
-      <div className="max-w-3xl w-full grid grid-cols-2 md:grid-cols-3 px-4 py-6 lg:grid-cols-4 gap-3">
+      <div className=" w-full grid grid-cols-2 md:grid-cols-3 px-4 py-6 lg:grid-cols-4 gap-3">
         {skills?.map((e, i) => {
           return (
             <div
